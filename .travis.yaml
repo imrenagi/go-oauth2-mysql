@@ -1,0 +1,29 @@
+language: go
+sudo: false
+
+go:
+  - "1.11"
+  - "1.12"
+  - "stable"
+
+services:
+  - mysql
+
+addons:
+  postgresql: "5.7"
+
+env:
+  global:
+    - MYSQL_URI=root:password@tcp(127.0.0.1:3306)/oauth2_test?parseTime=true&sslmode=disable
+
+before_install:
+  - mysql -e 'CREATE DATABASE oauth2_test;'
+  - mysql -e "use oauth2_test; update user set authentication_string=PASSWORD('password') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+  - mysql_upgrade -u root -ppassword
+  - service mysql restart
+
+script:
+  - go test -coverprofile=coverage.txt -covermode=atomic ./...
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
