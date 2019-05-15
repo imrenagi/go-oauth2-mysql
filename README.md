@@ -24,7 +24,7 @@ import (
 )
 
 func main() {
-	db, err := sqlx.Connect("mysql", "user:password@tcp(127.0.0.1:3306)/db_name?parseTime=true")
+	db, err := sqlx.Connect("mysql", "user:password@tcp(127.0.0.1:3306)/oauth_db?parseTime=true")
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -39,7 +39,14 @@ func main() {
 You will need running MySQL instance. E.g. the one running in docker and exposing a port to a host system
 
 ```bash
-docker run -it  -p 3306:3306 -e MYSQL_ROOT_PASSWORD=oauth2 -d mysql
+$ docker run -it  -p 3306:33 06 -e MYSQL_ROOT_PASSWORD=oauth2 -d mysql
+$ docker exec -it <container_id> bash
+$ mysql -u root -poauth2
+> create database oauth_db
+```
+
+```bash
+$ MYSQL_URI=root:oauth2@tcp(127.0.0.1:3306)/oauth_db?parseTime=true go test .
 ```
 
 ## MIT License
