@@ -39,7 +39,7 @@ func main() {
 You will need running MySQL instance. E.g. the one running in docker and exposing a port to a host system
 
 ```bash
-$ docker run -it  -p 3306:33 06 -e MYSQL_ROOT_PASSWORD=oauth2 -d mysql
+$ docker run -it  -p 3306:3306 -e MYSQL_ROOT_PASSWORD=oauth2 -d mysql
 $ docker exec -it <container_id> bash
 $ mysql -u root -poauth2
 > create database oauth_db
@@ -62,8 +62,8 @@ Copyright (c) 2019 Imre Nagi
 
 [Build-Status-Url]: https://travis-ci.org/imrenagi/go-oauth2-mysql
 [Build-Status-Image]: https://travis-ci.org/imrenagi/go-oauth2-mysql.svg?branch=master
-[codecov-url]: https://codecov.io/gh/imrenagi/go-oauth2-
-[codecov-image]: https://codecov.io/gh/imrenagi/go-oauth2-pg/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/imrenagi/go-oauth2-mysql
+[codecov-image]: https://codecov.io/gh/imrenagi/go-oauth2-mysql/branch/master/graph/badge.svg
 [godoc-url]: https://godoc.org/github.com/imrenagi/go-oauth2-mysql
 [godoc-image]: https://godoc.org/github.com/imrenagi/go-oauth2-mysql?status.svg
 [license-url]: http://opensource.org/licenses/MIT
