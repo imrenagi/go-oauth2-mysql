@@ -1,6 +1,7 @@
 package mysql
 
 import (
+	"database/sql"
 	"fmt"
 	"time"
 
@@ -95,7 +96,11 @@ func (s *ClientStore) GetByID(id string) (oauth2.ClientInfo, error) {
 	}
 
 	var item ClientStoreItem
-	if err := s.db.QueryRowx(fmt.Sprintf("SELECT * FROM %s WHERE id = ?", s.tableName), id).StructScan(&item); err != nil {
+	err := s.db.QueryRowx(fmt.Sprintf("SELECT * FROM %s WHERE id = ?", s.tableName), id).StructScan(&item)
+	switch {
+	case err == sql.ErrNoRows:
+		return nil, nil
+	case err != nil:
 		return nil, err
 	}
 

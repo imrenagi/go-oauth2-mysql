@@ -218,9 +218,13 @@ func (s *TokenStore) GetByCode(code string) (oauth2.TokenInfo, error) {
 	query := fmt.Sprintf("SELECT * FROM %s WHERE code=? LIMIT 1", s.tableName)
 	var item TokenStoreItem
 	err := s.db.QueryRowx(query, code).StructScan(&item)
-	if err != nil {
+	switch {
+	case err == sql.ErrNoRows:
+		return nil, nil
+	case err != nil:
 		return nil, err
 	}
+
 	return s.toTokenInfo(item.Data), nil
 }
 
@@ -233,7 +237,10 @@ func (s *TokenStore) GetByAccess(access string) (oauth2.TokenInfo, error) {
 	query := fmt.Sprintf("SELECT * FROM %s WHERE access=? LIMIT 1", s.tableName)
 	var item TokenStoreItem
 	err := s.db.QueryRowx(query, access).StructScan(&item)
-	if err != nil {
+	switch {
+	case err == sql.ErrNoRows:
+		return nil, nil
+	case err != nil:
 		return nil, err
 	}
 	return s.toTokenInfo(item.Data), nil
@@ -248,7 +255,10 @@ func (s *TokenStore) GetByRefresh(refresh string) (oauth2.TokenInfo, error) {
 	query := fmt.Sprintf("SELECT * FROM %s WHERE refresh=? LIMIT 1", s.tableName)
 	var item TokenStoreItem
 	err := s.db.QueryRowx(query, refresh).StructScan(&item)
-	if err != nil {
+	switch {
+	case err == sql.ErrNoRows:
+		return nil, nil
+	case err != nil:
 		return nil, err
 	}
 	return s.toTokenInfo(item.Data), nil
