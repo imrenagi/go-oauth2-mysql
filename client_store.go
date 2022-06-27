@@ -1,14 +1,16 @@
 package mysql
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"time"
 
 	"github.com/jmoiron/sqlx"
 	jsoniter "github.com/json-iterator/go"
-	"gopkg.in/oauth2.v3"
-	"gopkg.in/oauth2.v3/models"
+
+	"github.com/go-oauth2/oauth2/v4"
+	"github.com/go-oauth2/oauth2/v4/models"
 )
 
 type ClientStore struct {
@@ -90,13 +92,13 @@ func (s *ClientStore) toClientInfo(data string) (oauth2.ClientInfo, error) {
 }
 
 // GetByID retrieves and returns client information by id
-func (s *ClientStore) GetByID(id string) (oauth2.ClientInfo, error) {
+func (s *ClientStore) GetByID(ctx context.Context, id string) (oauth2.ClientInfo, error) {
 	if id == "" {
 		return nil, nil
 	}
 
 	var item ClientStoreItem
-	err := s.db.QueryRowx(fmt.Sprintf("SELECT * FROM %s WHERE id = ?", s.tableName), id).StructScan(&item)
+	err := s.db.QueryRowxContext(ctx, fmt.Sprintf("SELECT * FROM %s WHERE id = ?", s.tableName), id).StructScan(&item)
 	switch {
 	case err == sql.ErrNoRows:
 		return nil, nil
