@@ -208,7 +208,7 @@ func (s *TokenStore) RemoveByRefresh(ctx context.Context, refresh string) error 
 
 func (s *TokenStore) toTokenInfo(data string) oauth2.TokenInfo {
 	var tm models.Token
-	jsoniter.Unmarshal([]byte(data), &tm)
+	_ = jsoniter.Unmarshal([]byte(data), &tm)
 	return &tm
 }
 
