@@ -11,7 +11,6 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	pgadapter "github.com/vgarvardt/go-pg-adapter"
 
 	"github.com/go-oauth2/oauth2/v4/models"
 
@@ -109,7 +108,7 @@ func runTokenStoreCodeTest(t *testing.T, store *TokenStore) {
 	require.NoError(t, store.RemoveByCode(ctx, code))
 
 	_, err = store.GetByCode(ctx, code)
-	assert.Equal(t, pgadapter.ErrNoRows, err)
+	assert.Nil(t, err)
 }
 
 func runTokenStoreAccessTest(t *testing.T, store *TokenStore) {
@@ -129,7 +128,7 @@ func runTokenStoreAccessTest(t *testing.T, store *TokenStore) {
 	require.NoError(t, store.RemoveByAccess(ctx, code))
 
 	_, err = store.GetByAccess(ctx, code)
-	assert.Equal(t, pgadapter.ErrNoRows, err)
+	assert.Nil(t, err)
 }
 
 func runTokenStoreRefreshTest(t *testing.T, store *TokenStore) {
@@ -149,7 +148,7 @@ func runTokenStoreRefreshTest(t *testing.T, store *TokenStore) {
 	require.NoError(t, store.RemoveByRefresh(ctx, code))
 
 	_, err = store.GetByRefresh(ctx, code)
-	assert.Equal(t, pgadapter.ErrNoRows, err)
+	assert.Nil(t, err)
 }
 
 func runClientStoreTest(t *testing.T, store *ClientStore) {
