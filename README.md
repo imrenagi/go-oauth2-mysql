@@ -1,6 +1,7 @@
 # MySQL Storage for [OAuth 2.0](https://github.com/go-oauth2/oauth2)
 
-[![Build][Build-Status-Image]][Build-Status-Url] [![Codecov][codecov-image]][codecov-url]  [![GoDoc][godoc-image]][godoc-url] [![License][license-image]][license-url]
+![example workflow](https://github.com/httpoz/go-oauth2-mysql/actions/workflows/unit-test.yml/badge.svg)
+ [![GoDoc][godoc-image]][godoc-url] [![License][license-image]][license-url]
 
 ## Install
 
@@ -59,10 +60,6 @@ Copyright (c) 2019 Imre Nagi
 - MySQL Storage for OAuth 2.0 [`https://github.com/imrenagi/go-oauth2-mysql`](https://https://github.com/imrenagi/go-oauth2-mysql)
 - Oauth Postgres Implementation [`github.com/vgarvardt/go-pg-adapter`](https://github.com/vgarvardt/go-pg-adapter)
 
-[Build-Status-Url]: https://travis-ci.org/httpoz/go-oauth2-mysql
-[Build-Status-Image]: https://travis-ci.org/httpoz/go-oauth2-mysql.svg?branch=master
-[codecov-url]: https://codecov.io/gh/httpoz/go-oauth2-mysql
-[codecov-image]: https://codecov.io/gh/httpoz/go-oauth2-mysql/branch/master/graph/badge.svg
 [godoc-url]: https://godoc.org/github.com/httpoz/go-oauth2-mysql
 [godoc-image]: https://godoc.org/github.com/httpoz/go-oauth2-mysql?status.svg
 [license-url]: http://opensource.org/licenses/MIT
