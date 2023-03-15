@@ -75,6 +75,11 @@ func (s *ClientStore) initTable() error {
 	if err != nil {
 		return err
 	}
+
+	defer func() {
+		stmt.Close()
+	}()
+
 	_, err = stmt.Exec()
 	if err != nil {
 		return err
